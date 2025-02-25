@@ -1,0 +1,2 @@
+106X_upgrade2018_realistic_v16_L1v1
+Run2_2018,run2_nanoAOD_106Xv2
