@@ -1,5 +1,3 @@
-from CRABClient.UserUtilities import config, getUsername
-from CRABAPI.RawCommand import crabCommand
 import os
 import argparse
 
@@ -65,26 +63,34 @@ def getRequestInfoFrom(dataset):
     print("Request name:", request_name)
     return prefix, lumiMask, request_name
 
-config = config()
-### General configuration
-config.General.workArea        = args.workArea
-config.General.transferOutputs = True
-config.General.transferLogs    = True
 
-### JobType configuration
-config.JobType.pluginName      = 'Analysis'
-config.JobType.allowUndistributedCMSSW = False
+if args.inputDataset:
+    # Create project directory and copy the crab configuration file
+    print("Submitting CRAB job for dataset:", args.inputDataset)
+    prefix, lumiMask, request_name = getRequestInfoFrom(args.inputDataset)
+    if lumiMask is None:
+        lumiMask = ""
+    BASEDIR = os.getcwd()
+    WORKDIR = f"{BASEDIR}/CRAB/{request_name}"
+    os.makedirs(WORKDIR, exist_ok=True)
+    os.chdir(WORKDIR)
 
-### Data configuration
-config.Data.inputDBS           = 'global'
-config.Data.splitting          = 'FileBased'
-config.Data.unitsPerJob        = 1
-config.Data.outLFNDirBase      = f'/store/user/{getUsername()}/SKNano_Test'
-config.Data.publication       = False
-config.Data.allowNonValidInputDataset = False
+    with open(f"{BASEDIR}/templates/crab_config.py", "r") as f:
+        template = f.read()
+    template = template.replace("[WORKAREA]", "crab_projects")
+    template = template.replace("[REQUESTNAME]", request_name)
+    template = template.replace("[PSETNAME]", f"{BASEDIR}/configs/CustomNano_{prefix}_cfg.py")
+    template = template.replace("[INPUTDATASET]", args.inputDataset)
+    template = template.replace("[LUMIMASK]", lumiMask)
+    
+    with open(f"{WORKDIR}/crab_config.py", "w") as f:
+        f.write(template)
 
-### Site configuration
-config.Site.storageSite       = 'T3_KR_KNU'
+    os.system("crab submit -c crab_config.py")
+
+
+
+exit()
 
 if args.inputDataset:
     print("Submitting CRAB job for dataset:", args.inputDataset)
@@ -93,6 +99,7 @@ if args.inputDataset:
     config.JobType.psetName = f"configs/CustomNano_{prefix}_cfg.py"
     config.Data.inputDataset = args.inputDataset
     config.Data.lumiMask = lumiMask
+    print(config)
     crabCommand('submit', config=config)
 
 if args.inputList:
