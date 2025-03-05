@@ -1,0 +1,13 @@
+keep *
+drop Tau*
+drop boostedTau*
+drop FatJet*
+drop SoftActivityJet*
+drop GenJetAK8*
+drop SubJet*
+drop SubGenJetAK8*
+drop CaloMET*
+drop TkMET*
+drop LowPtElectron*
+drop IsoTrack*
+drop FsrPhoton*

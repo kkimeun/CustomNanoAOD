@@ -27,4 +27,4 @@ elif [[ "$input" == MC* ]]; then
 fi
 
 # Remove "file:dummy.root" from the config
-sed -i "s/'file:dummy.root'//g" configs/CustomNano_${input}_cfg.py
+# sed -i "s/'file:dummy.root'//g" configs/CustomNano_${input}_cfg.py
