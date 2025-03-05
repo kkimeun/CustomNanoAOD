@@ -17,20 +17,22 @@ For example, if you want to change the electron varible, check `PhysicsTools/Nan
 cd $CMSSW_BASE/src
 git cms-init
 git cms-merge-topic choij1589:from-CMSSW_10_6_27 # Run2
+git clone https://github.com/cms-nanoAOD/nanoAOD-tools.git PhysicsTools/NanoAODTools 
 scram b clean; scram b -j 8
 ```
 
 Get automized scripts:
 ```bash
-mkdir -p Configuration && cd Configuration
-git clone git@github.com:choij1589/CustomNanoAOD.git
+mkdir -p Configuration
+git clone git@github.com:choij1589/CustomNanoAOD.git Configuration/CustomNanoAOD
 ```
 
-## Runnin cmsDriver.py
+## Running cmsDriver.py
+To process MiniAOD to NanoAOD, trun `cmsDriver.py`.
 ```bash
-./scripts/runCMSDriver.sh MC_2017 # or DATA_2016preVFP
+./scripts/runCMSDriver.sh $PREFIX # MC_2017 / DATA_2016preVFP
 ```
-It will create `configs/CustomNano_MC_2017_cfg.py`
+It will create `configs/CustomNano_$PREFIX_cfg.py`
 
 ## Submitting jobs to crab
 ```bash
