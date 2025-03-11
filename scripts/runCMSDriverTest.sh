@@ -1,0 +1,2 @@
+#!/bin/bash
+cmsDriver.py --eventcontent NANOAODSIM --customise Configuration/DataProcessing/Utils.addMonitoring --datatier NANOAODSIM --conditions 106X_mc2017_realistic_v9 --step NANO --era Run2_2017,run2_nanoAOD_106Xv2 --python_filename test_cfg.py  --filein "file:00827E5C-253F-F942-9751-3F3277340A21.root" --fileout "file:NANOAOD.root" --no_exec --mc -n 100

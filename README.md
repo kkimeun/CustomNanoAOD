@@ -17,7 +17,10 @@ For example, if you want to change the electron varible, check `PhysicsTools/Nan
 cd $CMSSW_BASE/src
 git cms-init
 git cms-merge-topic choij1589:from-CMSSW_10_6_27 # Run2
-git clone https://github.com/cms-nanoAOD/nanoAOD-tools.git PhysicsTools/NanoAODTools 
+# for post process, not strictly needed
+git clone https://github.com/cms-nanoAOD/nanoAOD-tools.git PhysicsTools/NanoAODTools
+
+# always clean and build
 scram b clean; scram b -j 8
 ```
 
@@ -34,6 +37,17 @@ To process MiniAOD to NanoAOD, trun `cmsDriver.py`.
 ```
 It will create `configs/CustomNano_$PREFIX_cfg.py`
 
+## Preparing crab submission scripts
+```bash
+python3 prepare_crab_submission.py -i $DASFILENAME     # submitting single file
+python3 prepare_crab_submission.py -l $FILELIST.txt    # submitting list of files, seperated by line
+```
+The command will print out submission commands. Follow the instructions to submit the crab jobs. Example of filelist can be found in `SampleLists/`
+
+# To do
+- [ ] Automatically check crab status and resubmit failed jobs
+
+# Test
 ## Submitting jobs to crab
 ```bash
 source /cvmfs/cms.cern.ch/crab3/crab.sh

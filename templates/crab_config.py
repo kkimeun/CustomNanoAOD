@@ -18,7 +18,7 @@ config.Data.lumiMask           = '[LUMIMASK]'
 config.Data.inputDBS           = 'global'
 config.Data.splitting          = 'FileBased'
 config.Data.unitsPerJob        = 1
-config.Data.outLFNDirBase      = 'store/user/{}/SKNano'.format(getUsername())
+config.Data.outLFNDirBase      = '/store/user/%s/SKNano' % (getUsername())
 config.Data.publication        = False
 
 ### Site configuration

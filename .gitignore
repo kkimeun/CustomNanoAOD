@@ -5,3 +5,4 @@ BackUps/*
 **.root
 **.pyc
 **/__pycache__/**
+CRAB/*
