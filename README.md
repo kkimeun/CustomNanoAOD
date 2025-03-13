@@ -27,8 +27,8 @@ cd $CMSSW_BASE/src
 git cms-init
 git cms-merge-topic choij1589:from-CMSSW_10_6_27 # Run2
 git cms-merge-topic choij1589:from-CMSSW_13_0_13 # Run3
-```
-# for post process, not strictly needed
+
+# for post process. Not strictly needed.
 git clone https://github.com/cms-nanoAOD/nanoAOD-tools.git PhysicsTools/NanoAODTools
 
 # always clean and build
