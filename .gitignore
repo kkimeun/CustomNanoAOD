@@ -1,8 +1,8 @@
 test/*
 crab_projects/*
 crab.log
+*.root
 BackUps/*
-**.root
 **.pyc
 **/__pycache__/**
 CRAB/*

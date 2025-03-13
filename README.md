@@ -11,12 +11,12 @@ cd SKNanoMaker_CMSSW_10_6_27/src
 cmsenv
 ```
 
-for Run3, use CMSSW\_13\_0\_10.
+for Run3, use CMSSW\_13\_0\_13.
 ```bash
 source /cvmfs/cms.cern.ch/cmsset_default.sh
 export SCRAM_ARCH=el8_amd64_gcc11
-scram p -n SKNanoMaker_Run3_CMSSW_13_0_10 CMSSW CMSSW_13_0_10
-cd SKNanoMaker_Run3_CMSSW_13_0_10/src
+scram p -n SKNanoMaker_Run3_CMSSW_13_0_13 CMSSW CMSSW_13_0_13
+cd SKNanoMaker_Run3_CMSSW_13_0_13/src
 cmsenv
 ```
 
@@ -26,7 +26,7 @@ For example, if you want to change the electron varible, check `PhysicsTools/Nan
 cd $CMSSW_BASE/src
 git cms-init
 git cms-merge-topic choij1589:from-CMSSW_10_6_27 # Run2
-git cms-merge-topic choij1589:from-CMSSW_13_0_10 # Run3
+git cms-merge-topic choij1589:from-CMSSW_13_0_13 # Run3
 ```
 # for post process, not strictly needed
 git clone https://github.com/cms-nanoAOD/nanoAOD-tools.git PhysicsTools/NanoAODTools
@@ -39,6 +39,21 @@ Get automized scripts:
 ```bash
 mkdir -p Configuration
 git clone git@github.com:choij1589/CustomNanoAOD.git Configuration/CustomNanoAOD
+```
+
+## Test job
+for Run3, download MiniAOD file for the local run:
+```bash
+xrdcp root://cmsxrootd.fnal.gov//store/mc/Run3Summer23MiniAODv4/DYto2L-4Jets_MLL-50_TuneCP5_13p6TeV_madgraphMLM-pythia8/MINIAODSIM/130X_mcRun3_2023_realistic_v14-v1/70000/00016e4c-72ec-40bc-9cf3-33dc1afe5c8a.root .
+```
+
+Run cmsDriver.py command with:
+```
+./scripts/runCMSDrivetTest-Run3.sh
+```
+It will make test\_cfg.py configuration file. Run this file to make custom NanoAOD file, named NANOAOD.root
+```bash
+cmsRun test_cfg.py
 ```
 
 ## Running cmsDriver.py
@@ -55,14 +70,14 @@ python3 prepare_crab_submission.py -l $FILELIST.txt    # submitting list of file
 ```
 The command will print out submission commands. Follow the instructions to submit the crab jobs. Example of filelist can be found in `SampleLists/`
 
-# Test
-## Submitting jobs to crab
+## Automatic Resubmission
+copy `templates/resubmit.sh` in the crab directory. It will check the crab job status and resubmit if there is unfinished jobs.
 ```bash
-source /cvmfs/cms.cern.ch/crab3/crab.sh
-python3 crab_config.py -i $DASFILENAME     # submitting single file
-python3 crab_config.py -l $FILELIST.txt    # submitting list of files, seperated by name
+cd CRAB/$SUBMISSION_DIR
+./resubmit.sh
 ```
-See SampleLists for example
+> You can change how many crab jobs to be submitted and resubmitted in parallel, change $NTHREAD variable.
+> If the resubmission killed by accident, delete `unfinished.txt` or `unfinished.tmp` and re-run the `resubmit.sh`
 
 ## Skimming
 **Need Update**

@@ -147,5 +147,3 @@ if args.inputList:
     
     print(f"Submission script created at {WORKDIR}/submit.sh")
     print(f"Run 'bash {WORKDIR}/submit.sh' to submit all jobs in parallel")
-        
-        
