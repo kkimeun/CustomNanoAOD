@@ -2,8 +2,8 @@
 
 # Define directories, token, and chat ID
 CRAB_DIR="crab_projects"
-TOKEN="8000474220:AAEYEKs0Iw-TwIIUkkGgFDyjLkv2z-VkXW4"
-CHATID="854572446"
+TOKEN=$TOKEN
+CHATID=$CHATID
 UNFINISHED="unfinished_tasks.txt"
 TEMP_FILE="unfinished_tasks.tmp"  # Fixed variable name
 NTHREAD=8
