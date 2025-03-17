@@ -39,6 +39,14 @@ def getRequestInfoFrom(dataset):
         prefix = "MC_2017"
     elif "RunIISummer20UL18MiniAODv2" in dataset:
         prefix = "MC_2018"
+    elif "Run3Summer22MiniAODv4" in dataset:
+        prefix = "MC_2022"
+    elif "Run3Summer22EEMiniAODv4" in dataset:
+        prefix = "MC_2022EE"
+    elif "Run3Summer23MiniAODv4" in dataset:
+        prefix = "MC_2023"
+    elif "Run3Summer23BPixMiniAODv4" in dataset:
+        prefix = "MC_2023EE"
     elif "HIPM_UL2016_MiniAODv2" in dataset:
         prefix = "DATA_2016preVFP"
         lumiMask = "https://cms-service-dqmdc.web.cern.ch/CAF/certification/Collisions16/13TeV/Legacy_2016/Cert_271036-284044_13TeV_Legacy2016_Collisions16_JSON.txt"
@@ -51,11 +59,13 @@ def getRequestInfoFrom(dataset):
     elif "UL2018_MiniAODv2" in dataset:
         prefix = "DATA_2018"
         lumiMask = "https://cms-service-dqmdc.web.cern.ch/CAF/certification/Collisions18/13TeV/Legacy_2018/Cert_314472-325175_13TeV_Legacy2018_Collisions18_JSON.txt"
-    elif re.search(r"2022.*27Jun2023*", dataset):
-        prefix = "DATA_2022"
+    elif re.search(r"2022.*22Sep2023*", dataset):
+        if "22C" in dataset or "22D" in dataset or "22E" in datset:
+            prefix = "DATA_2022"
         lumiMask = "https://cms-service-dqmdc.web.cern.ch/CAF/certification/Collisions22/Cert_Collisions2022_355100_362760_Golden.json"
-    elif re.search(r"2022.*PromptReco*", dataset):
-        prefix = "DATA_2022EE"
+    elif re.search(r"2022.*22Sep2023*", dataset):
+        if "22F" in dataset or "22G" in dataset:
+            prefix = "DATA_2022EE"
         lumiMask = "https://cms-service-dqmdc.web.cern.ch/CAF/certification/Collisions22/Cert_Collisions2022_355100_362760_Golden.json"
     elif "Run2023C" in dataset:
         prefix = "DATA_2023"

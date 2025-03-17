@@ -1,1 +1,1 @@
-/MuonEG/Run2023D-PromptReco-v2/MINIAOD
+/MuonEG/Run2023D-22Sep2023_v2-v1/MINIAOD
