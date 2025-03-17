@@ -15,16 +15,31 @@ if [[ -z "$globalTag" || -z "$eraString" ]]; then
 fi
 
 if [[ "$input" == DATA* ]]; then
-    cmsDriver.py --eventcontent NANOAOD --customise_commands="process.add_(cms.Service('InitRootHandlers', EnableIMT = cms.untracked.bool(False)));process.MessageLogger.cerr.FwkReport.reportEvery=1000" \
-    --datatier NANOAOD --conditions ${globalTag} --step NANO --era ${eraString} --python_filename configs/CustomNano_${input}_cfg.py \
-    --filein "file:dummy.root" \
-    --fileout "file:NANOAOD.root" --no_exec --data -n -1 || exit $? ;
+    if [[ "$eraString" == Run2* ]]; then
+        cmsDriver.py --eventcontent NANOAOD --customise_commands="process.add_(cms.Service('InitRootHandlers', EnableIMT = cms.untracked.bool(False)));process.MessageLogger.cerr.FwkReport.reportEvery=1000" \
+        --datatier NANOAOD --conditions ${globalTag} --step NANO --era ${eraString} --python_filename configs/CustomNano_${input}_cfg.py \
+        --filein "file:dummy.root" \
+        --fileout "file:NANOAOD.root" --no_exec --data -n -1 || exit $? ;
+    elif [[ "$eraString" == Run3* ]]; then
+        cmsDriver.py --eventcontent NANOAOD --customise_commands="process.add_(cms.Service('InitRootHandlers', EnableIMT = cms.untracked.bool(False)));process.MessageLogger.cerr.FwkReport.reportEvery=1000" --scenario pp \
+        --datatier NANOAOD --conditions ${globalTag} --step NANO --era ${eraString} --python_filename configs/CustomNano_${input}_cfg.py \
+        --filein "file:dummy.root" \
+        --fileout "file:NANOAOD.root" --no_exec --data -n -1 || exit $? ;
+    else
+        echo "Check eraString $eraString"
+    fi
 elif [[ "$input" == MC* ]]; then
-    cmsDriver.py --eventcontent NANOAODSIM --customise_commands="process.add_(cms.Service('InitRootHandlers', EnableIMT = cms.untracked.bool(False)));process.MessageLogger.cerr.FwkReport.reportEvery=1000" \
-    --datatier NANOAODSIM --conditions ${globalTag} --step NANO --era ${eraString} --python_filename configs/CustomNano_${input}_cfg.py \
-    --filein "file:dummy.root" \
-    --fileout "file:NANOAOD.root" --no_exec --mc -n -1 || exit $? ;
+    if [[ "$eraString" == Run2* ]]; then
+        cmsDriver.py --eventcontent NANOAODSIM --customise_commands="process.add_(cms.Service('InitRootHandlers', EnableIMT = cms.untracked.bool(False)));process.MessageLogger.cerr.FwkReport.reportEvery=1000" \
+        --datatier NANOAODSIM --conditions ${globalTag} --step NANO --era ${eraString} --python_filename configs/CustomNano_${input}_cfg.py \
+        --filein "file:dummy.root" \
+        --fileout "file:NANOAOD.root" --no_exec --mc -n -1 || exit $? ;
+    elif [[ "$eraString" == Run3* ]]; then
+        cmsDriver.py --eventcontent NANOAODSIM --customise_commands="process.add_(cms.Service('InitRootHandlers', EnableIMT = cms.untracked.bool(False)));process.MessageLogger.cerr.FwkReport.reportEvery=1000" --scenario pp \
+        --datatier NANOAODSIM --conditions ${globalTag} --step NANO --era ${eraString} --python_filename configs/CustomNano_${input}_cfg.py \
+        --filein "file:dummy.root" \
+        --fileout "file:NANOAOD.root" --no_exec --mc -n -1 || exit $? ;
+    else
+        echo "Check eraString $eraString"
+    fi
 fi
-
-# Remove "file:dummy.root" from the config
-# sed -i "s/'file:dummy.root'//g" configs/CustomNano_${input}_cfg.py

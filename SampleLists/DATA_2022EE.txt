@@ -1,0 +1,2 @@
+/MuonEG/Run2022F-PromptReco-v1/MINIAOD
+/MuonEG/Run2022G-PromptReco-v1/MINIAOD

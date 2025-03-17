@@ -1,4 +1,5 @@
 import os
+import re
 import argparse
 from datetime import datetime
 parser = argparse.ArgumentParser()
@@ -50,6 +51,18 @@ def getRequestInfoFrom(dataset):
     elif "UL2018_MiniAODv2" in dataset:
         prefix = "DATA_2018"
         lumiMask = "https://cms-service-dqmdc.web.cern.ch/CAF/certification/Collisions18/13TeV/Legacy_2018/Cert_314472-325175_13TeV_Legacy2018_Collisions18_JSON.txt"
+    elif re.search(r"2022.*27Jun2023*", dataset):
+        prefix = "DATA_2022"
+        lumiMask = "https://cms-service-dqmdc.web.cern.ch/CAF/certification/Collisions22/Cert_Collisions2022_355100_362760_Golden.json"
+    elif re.search(r"2022.*PromptReco*", dataset):
+        prefix = "DATA_2022EE"
+        lumiMask = "https://cms-service-dqmdc.web.cern.ch/CAF/certification/Collisions22/Cert_Collisions2022_355100_362760_Golden.json"
+    elif "Run2023C" in dataset:
+        prefix = "DATA_2023"
+        lumiMask = "https://cms-service-dqmdc.web.cern.ch/CAF/certification/Collisions23/Cert_Collisions2023_366442_370790_Golden.json"
+    elif "Run2023D" in dataset:
+        prefix = "DATA_2023BPix"
+        lumiMask = "https://cms-service-dqmdc.web.cern.ch/CAF/certification/Collisions23/Cert_Collisions2023_366442_370790_Golden.json"
     else:
         raise ValueError(f"Cannot parse era from dataset: {dataset}")
     
