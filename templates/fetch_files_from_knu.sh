@@ -5,9 +5,9 @@ set -e
 voms-proxy-init --voms=cms --valid=168:00
 
 # Define source and destination directories, and file names
-SOURCE="choij@cms.knu.ac.kr:/u/user/choij/SE_UserHome/SKNano"
-REMOTE_BASE="root://cluster142.knu.ac.kr//store/user/choij"
-LOCAL_BASE="/gv0/Users/choij"
+SOURCE="eunsu@cms.knu.ac.kr:/u/user/eunsu/SE_UserHome/SKNano"
+REMOTE_BASE="root://cluster142.knu.ac.kr//store/user/eunsu"
+LOCAL_BASE="/gv0/Users/eunsu"
 RSYNC_DIFF="rsync_diff.txt"
 ROOT_FILES="root_files.txt"
 
