@@ -46,7 +46,7 @@ def getRequestInfoFrom(dataset):
     elif "Run3Summer23MiniAODv4" in dataset:
         prefix = "MC_2023"
     elif "Run3Summer23BPixMiniAODv4" in dataset:
-        prefix = "MC_2023EE"
+        prefix = "MC_2023BPix"
     elif "HIPM_UL2016_MiniAODv2" in dataset:
         prefix = "DATA_2016preVFP"
         lumiMask = "https://cms-service-dqmdc.web.cern.ch/CAF/certification/Collisions16/13TeV/Legacy_2016/Cert_271036-284044_13TeV_Legacy2016_Collisions16_JSON.txt"
