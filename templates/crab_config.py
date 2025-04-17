@@ -10,6 +10,7 @@ config.General.transferLogs    = False
 ### JobType configuration
 config.JobType.psetName        = '[PSETNAME]'
 config.JobType.pluginName      = 'Analysis'
+config.JobType.maxMemoryMB     = 4000
 config.JobType.allowUndistributedCMSSW = False
 
 ### Data configuration
